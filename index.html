@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIRTUAL FIT, Spatial Try-On Store</title>
+<meta name="description" content="Virtual Fit is a single spatial try-on page. Pick a category, tap a floating product card, choose size and colour, and see the look update on the model in the centre.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;0,700;0,800;0,900;1,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-head">
+  <a class="logo" href="#stage" aria-label="Virtual Fit home">VIRTUAL<span>FIT</span></a>
+  <p class="head-note">Spatial try-on, demo store</p>
+  <button class="bag-btn" id="bagBtn" type="button" aria-label="Shopping bag">
+    <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 8h13l-1.1 12.1a1.5 1.5 0 0 1-1.5 1.4H8.1a1.5 1.5 0 0 1-1.5-1.4L5.5 8Z"/><path d="M8.5 10V6.5a3.5 3.5 0 0 1 7 0V10"/></svg>
+    Bag <span class="bag-count" id="bagCount">0</span>
+  </button>
+</header>
+
+<main>
+<section class="stage" id="stage" aria-label="Virtual fitting stage">
+
+  <div class="stage-bg" aria-hidden="true">
+    <span class="blob blob-a"></span><span class="blob blob-b"></span><span class="grid-lines"></span>
+  </div>
+
+  <div class="fit-word" id="fitWord" aria-hidden="true">FIT</div>
+
+  <div class="stage-top">
+    <h1 class="stage-title">Try it on, <em>in space.</em></h1>
+    <p class="stage-sub">One model, one room, every category floating around her. Tap a category, then a card, and the look updates in the centre.</p>
+    <nav class="pills" id="pills" aria-label="Product categories">
+      <button type="button" class="pill is-active" data-cat="tops">Tops</button>
+      <button type="button" class="pill" data-cat="bottoms">Bottoms</button>
+      <button type="button" class="pill" data-cat="outerwear">Outerwear</button>
+      <button type="button" class="pill" data-cat="shoes">Shoes</button>
+      <button type="button" class="pill" data-cat="accessories">Accessories</button>
+    </nav>
+  </div>
+
+  <div class="stage-space" id="stageSpace">
+    <div class="fit-front" aria-hidden="true">FIT</div>
+    <div class="cards cards-left" id="cardsLeft"></div>
+
+    <figure class="model-wrap" data-depth="6">
+      <div class="model-ring" aria-hidden="true"></div>
+      <div class="model-float">
+        <img class="model-img is-on" id="modelA" src="img/model-base.webp" alt="Model wearing a white t-shirt, black trousers and white sneakers in a grey studio" width="1120" height="2240" fetchpriority="high">
+        <img class="model-img" id="modelB" src="img/model-outerwear.webp" alt="" width="1280" height="1920" aria-hidden="true">
+      </div>
+      <div class="model-shadow" aria-hidden="true"></div>
+      <figcaption class="featured-chip" id="featuredChip">
+        <img id="chipImg" src="img/prod-tee.webp" alt="" width="120" height="107">
+        <span><small>On the model</small><strong id="chipName">Essential White Tee</strong></span>
+      </figcaption>
+    </figure>
+
+    <div class="cards cards-right" id="cardsRight"></div>
+  </div>
+
+  <div class="product-bar" id="productBar" aria-live="polite">
+    <div class="bar-info">
+      <p class="bar-cat" id="barCat">Tops</p>
+      <h2 class="bar-name" id="barName">Essential White Tee</h2>
+      <p class="bar-price" id="barPrice">$55</p>
+    </div>
+    <div class="bar-group">
+      <p class="bar-label" id="sizeLabel">Size, <span id="sizeVal">M</span></p>
+      <div class="sizes" id="sizes" role="group" aria-labelledby="sizeLabel"></div>
+    </div>
+    <div class="bar-group">
+      <p class="bar-label" id="colorLabel">Colour, <span id="colorVal">White</span></p>
+      <div class="colors" id="colors" role="group" aria-labelledby="colorLabel"></div>
+    </div>
+    <button class="detail-btn" id="detailBtn" type="button">View details</button>
+    <button class="add-btn" id="addBtn" type="button">Add to bag
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+  </div>
+
+  <p class="stage-foot">Demo store concept rebuilt from the Virtual Fitting design shown in the CodeVibes tutorial. Model photography generated for this demo, one model, one studio, one light across every category.</p>
+</section>
+</main>
+
+<!-- DETAIL SHEET -->
+<div class="detail-scrim" id="detailScrim" hidden></div>
+<aside class="detail-sheet" id="detailSheet" aria-hidden="true" aria-label="Product details" role="dialog">
+  <button class="detail-close" id="detailClose" type="button" aria-label="Close details">×</button>
+  <div class="detail-media"><img id="detailImg" src="img/prod-tee.webp" alt=""></div>
+  <div class="detail-body">
+    <p class="detail-cat" id="detailCat"></p>
+    <h2 class="detail-name" id="detailName"></h2>
+    <p class="detail-code" id="detailCode"></p>
+    <p class="detail-price" id="detailPrice"></p>
+    <h3 class="detail-h">What it is</h3>
+    <p class="detail-p" id="detailAbout"></p>
+    <h3 class="detail-h">Fabric and what is inside the make</h3>
+    <p class="detail-p" id="detailFabric"></p>
+    <h3 class="detail-h">How it is made and styled</h3>
+    <p class="detail-p" id="detailMake"></p>
+    <h3 class="detail-h">Data points</h3>
+    <dl class="detail-data" id="detailData"></dl>
+    <div class="detail-opts">
+      <div class="bar-group">
+        <p class="bar-label">Size, <span id="detailSizeVal">M</span></p>
+        <div class="sizes" id="detailSizes"></div>
+      </div>
+      <div class="bar-group">
+        <p class="bar-label">Colour, <span id="detailColorVal">White</span></p>
+        <div class="colors" id="detailColors"></div>
+      </div>
+    </div>
+    <p class="detail-note">Size and colour here are the same choices as the product bar below the model. Pick in either place, both stay in step.</p>
+    <button class="add-btn detail-add" id="detailAdd" type="button">Add to bag</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
